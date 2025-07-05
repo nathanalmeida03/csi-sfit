@@ -18,13 +18,19 @@ export const Contact: React.FC = () => {
       link: 'mailto:csi@sfit.ac.in',
       color: 'text-primary-500'
     },
-    {
-      icon: Phone,
-      title: 'Phone',
-      content: '+91 98765 43210',
-      link: 'tel:+919876543210',
-      color: 'text-secondary-500'
-    },
+{
+  icon: Phone,
+  title: 'Phone',
+  content: (
+    <p className="text-gray-300">
+      <a href="tel:+919325209355" className="hover:text-primary-500 transition-colors">+91 93252 09355</a> | 
+      <a href="tel:+919820237659" className="hover:text-primary-500 transition-colors">+91 98202 37659</a> | 
+      <a href="tel:+918879262528" className="hover:text-primary-500 transition-colors">+91 88792 62528</a> | 
+      <a href="tel:+917499531769" className="hover:text-primary-500 transition-colors">+91 74995 31769</a>
+    </p>
+  ),
+  color: 'text-secondary-500'
+},
     {
       icon: MapPin,
       title: 'Address',
