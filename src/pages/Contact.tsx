@@ -1,32 +1,14 @@
+// Contact.tsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Mail, Phone, MapPin, Clock, Send, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { GlassCard } from '../components/GlassCard';
 import { Enhanced3DCard } from '../components/Enhanced3DCard';
 
 export const Contact: React.FC = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const contactInfo = [
     {
@@ -47,7 +29,7 @@ export const Contact: React.FC = () => {
       icon: MapPin,
       title: 'Address',
       content: 'St. Francis Institute of Technology, Mount Poinsur, S.V.P. Road, Borivali West, Mumbai - 400103',
-      link: 'https://maps.google.com',
+      link: 'https://maps.app.goo.gl/Zh8Tk7Wj2m7pSGQJ6',
       color: 'text-purple-500'
     },
     {
@@ -70,7 +52,6 @@ export const Contact: React.FC = () => {
       {/* Hero Section */}
       <section className="relative py-20">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-secondary-500/10" />
-        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={heroRef}
@@ -93,7 +74,7 @@ export const Contact: React.FC = () => {
       {/* Contact Content */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-1 gap-12">
             {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -101,7 +82,6 @@ export const Contact: React.FC = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <h2 className="text-3xl font-bold text-white mb-8">Contact Information</h2>
-              
               <div className="space-y-6 mb-8">
                 {contactInfo.map((info, index) => {
                   const Icon = info.icon;
@@ -168,97 +148,6 @@ export const Contact: React.FC = () => {
                 </div>
               </motion.div>
             </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              ref={formRef}
-              initial={{ opacity: 0, x: 50 }}
-              animate={formInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <Enhanced3DCard>
-                <div className="p-8">
-                  <h2 className="text-3xl font-bold text-white mb-6">Send Message</h2>
-                  
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                          Name
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-colors"
-                          placeholder="Your name"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          required
-                          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-colors"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                        Subject
-                      </label>
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-colors"
-                        placeholder="What's this about?"
-                      />
-                    </div>
-
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                        Message
-                      </label>
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        required
-                        rows={6}
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-colors resize-none"
-                        placeholder="Tell us more about your inquiry..."
-                      />
-                    </div>
-
-                    <motion.button
-                      type="submit"
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-primary-500/25 transition-all duration-300 flex items-center justify-center space-x-2"
-                    >
-                      <Send className="w-5 h-5" />
-                      <span>Send Message</span>
-                    </motion.button>
-                  </form>
-                </div>
-              </Enhanced3DCard>
-            </motion.div>
           </div>
         </div>
       </section>
@@ -267,17 +156,24 @@ export const Contact: React.FC = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
+            ref={formRef}
             initial={{ opacity: 0, y: 50 }}
             animate={formInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
+            <h2 className="text-3xl font-bold text-white mb-6">Location</h2>
             <GlassCard className="overflow-hidden">
-              <div className="h-96 bg-gradient-to-br from-primary-500/20 to-secondary-500/20 flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-16 h-16 text-primary-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-white mb-2">Interactive Map</h3>
-                  <p className="text-gray-400">Map integration would be implemented here</p>
-                </div>
+              <div className="h-96 w-full">
+                <iframe
+  title="CSI SFIT Location"
+  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3766.8900917764836!2d72.853269!3d19.2436212!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b13affffffff%3A0xfd071f1d3a7844ef!2sSt.%20Francis%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1751699365795!5m2!1sen!2sin"
+  width="100%"
+  height="100%"
+  style={{ border: 0, filter: 'invert(90%)' }}
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
               </div>
             </GlassCard>
           </motion.div>
