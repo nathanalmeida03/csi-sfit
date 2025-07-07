@@ -28,6 +28,18 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJNK7wRbWSHLQMthYsHf82uviKiJQM-vrIAPqti_OceIvLgTjmiGVegLgIZ0EOkRHI/exec'; 
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    
     emailjs.send(
       'service_khb9g4c',
       'template_qceaydk',
