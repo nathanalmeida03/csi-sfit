@@ -22,7 +22,7 @@
 We are dedicated to fostering a vibrant community of students and professionals passionate about computing, technology, and innovation.
 
 ---
-
+View the live [website](https://sfit-csi.netlify.app/)
 ## Features
 
 - 💻 Community-driven events, workshops & seminars
