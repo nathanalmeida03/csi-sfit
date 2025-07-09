@@ -7,7 +7,7 @@
 
 </td>
 <td align="center" width="220">
-    <img src="assets/csi-sfit-logo.gif" alt="CSI SFIT Logo" width="200"/>
+    <img src="/csi-sfit-logo.gif" alt="CSI SFIT Logo" width="200"/>
 </td>
 </tr>
 </table>
