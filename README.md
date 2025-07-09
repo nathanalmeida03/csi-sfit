@@ -64,6 +64,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Connect with Us
 
-- [SFIT Website](https://www.sfit.ac.in/)
-- [CSI India](https://www.csi-india.org/)
 - [Contact the Maintainers](mailto:movefore@gmail.com)
