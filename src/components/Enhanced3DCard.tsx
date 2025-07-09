@@ -20,8 +20,8 @@ export const Enhanced3DCard: React.FC<Enhanced3DCardProps> = ({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 30 });
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 30 });
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [intensity, -intensity]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-intensity, intensity]);
