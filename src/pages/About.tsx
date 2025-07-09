@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Users, Target, Award, Lightbulb, Calendar, MapPin } from 'lucide-react';
+import { Users, Target, Award, Lightbulb, MapPin, Calendar } from 'lucide-react';
 import { GlassCard } from '../components/GlassCard';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Random3DCard from "../components/Random3Dcard";
+import { Fade } from "react-awesome-reveal";
+
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const About: React.FC = () => {
-  const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [timelineRef, timelineInView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const heroRef = useRef<HTMLDivElement | null>(null);
+  const headingRef = useRef<HTMLHeadingElement | null>(null);
+  const paragraphRef = useRef<HTMLParagraphElement | null>(null);
+  const csiRef = useRef<HTMLSpanElement | null>(null);
+
+  const { ref: heroInViewRef, inView: heroInView } = useInView({ triggerOnce: true });
+  const setHeroRefs = useCallback((node: HTMLDivElement | null) => {
+    if (node) heroRef.current = node;
+    heroInViewRef(node);
+  }, [heroInViewRef]);
+
+  const timelineRefs = useRef<(HTMLLIElement | null)[]>([]);
 
   const values = [
     {
@@ -70,28 +87,86 @@ export const About: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    if (headingRef.current && paragraphRef.current) {
+      gsap.fromTo(
+        headingRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }
+      );
+
+      gsap.fromTo(
+        paragraphRef.current,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, delay: 0.3, duration: 1.2, ease: 'power3.out' }
+      );
+
+      gsap.fromTo(
+        csiRef.current,
+        { scale: 1, opacity: 0.5 },
+        {
+          scale: 1.2,
+          opacity: 1,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut',
+          duration: 0.8,
+        }
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!timelineRefs.current.length) return;
+
+    const triggers: ScrollTrigger[] = [];
+
+    timelineRefs.current.forEach((ref, index) => {
+      if (ref) {
+        const ctx = gsap.context(() => {
+          const animation = gsap.fromTo(
+            ref,
+            { opacity: 0, x: index % 2 === 0 ? -100 : 100 },
+            {
+              opacity: 1,
+              x: 0,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: ref,
+                start: 'top 85%',
+                end: 'top 40%',
+                scrub: 2,
+              },
+            }
+          );
+          triggers.push(animation.scrollTrigger as ScrollTrigger);
+        }, ref);
+
+        return () => ctx.revert();
+      }
+    });
+
+    return () => {
+      triggers.forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
       <section className="relative py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            ref={heroRef}
-            initial={{ opacity: 0, y: 50 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              About <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">CSI SFIT</span>
+          <div ref={setHeroRefs} className="text-center mb-16">
+            <h1 ref={headingRef} className="text-4xl md:text-6xl font-bold text-white mb-6">
+              About <span ref={csiRef} className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">CSI SFIT</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
-              The Computer Society of India, SFIT Chapter, is a vibrant community of technology enthusiasts 
-              dedicated to advancing computer science education and fostering innovation among students.
+            <p ref={paragraphRef} className="text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+              The Computer Society of India, SFIT Chapter, is a vibrant community of technology enthusiasts dedicated to advancing computer science education and fostering innovation among students.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Quick Stats */}
+          {/* Stats */}
+          <Fade direction="up" delay={100} cascade damping={0.1} triggerOnce>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
@@ -115,10 +190,11 @@ export const About: React.FC = () => {
               <div className="text-gray-400">Awards Won</div>
             </GlassCard>
           </motion.div>
+          </Fade>
         </div>
       </section>
 
-      {/* Values Section */}
+      {/* Values */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -142,13 +218,15 @@ export const About: React.FC = () => {
                   animate={heroInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: 0.1 * index }}
                 >
-                  <GlassCard className="p-8 h-full text-center">
-                    <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mx-auto mb-6">
-                      <Icon className="w-8 h-8 text-white" />
+                  <Random3DCard glowColor={index % 2 === 0 ? '#34D399' : '#FFD700'}>
+                    <div className="p-8 h-full text-center">
+                      <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <Icon className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-white mb-4">{value.title}</h3>
+                      <p className="text-gray-400 leading-relaxed">{value.description}</p>
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-4">{value.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{value.description}</p>
-                  </GlassCard>
+                  </Random3DCard>
                 </motion.div>
               );
             })}
@@ -156,57 +234,49 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Timeline Section */}
+      {/* Timeline */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            ref={timelineRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={timelineInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
+          <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Our <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Journey</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               From humble beginnings to becoming a leading tech community
             </p>
-          </motion.div>
+          </div>
 
           <div className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-primary-500 via-secondary-500 to-primary-500" />
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-primary-500 via-secondary-500 to-primary-500" />
 
-            {timeline.map((item, index) => (
-              <motion.div
-                key={item.year}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={timelineInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`relative flex items-center mb-12 ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                }`}
-              >
-                <div className="w-1/2 px-6">
-                  <GlassCard className="p-6">
-                    <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${item.color} text-white mb-3`}>
-                      {item.year}
-                    </div>
-                    <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
-                    <p className="text-gray-400">{item.description}</p>
-                  </GlassCard>
-                </div>
+            <ul className="space-y-16">
+              {timeline.map((item, index) => (
+                <li
+                  key={item.year}
+                  ref={(el) => (timelineRefs.current[index] = el)}
+                  className={`relative flex flex-col md:flex-row items-center ${
+                    index % 2 !== 0 ? 'md:flex-row-reverse' : ''
+                  }`}
+                >
+                  <div className="md:w-1/2 w-full px-4">
+                    <GlassCard className="p-6">
+                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${item.color} text-white mb-3`}>
+                        {item.year}
+                      </span>
+                      <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
+                      <p className="text-gray-400">{item.description}</p>
+                    </GlassCard>
+                  </div>
 
-                {/* Timeline dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full border-4 border-dark-800" />
-              </motion.div>
-            ))}
+                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full border-4 border-dark-800 z-10" />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Contact Info */}
+       {/* Contact Info */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlassCard className="p-8 text-center">
