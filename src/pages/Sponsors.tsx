@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Handshake, Download, ExternalLink } from 'lucide-react';
@@ -18,6 +18,11 @@ interface Sponsor {
 export const Sponsors: React.FC = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   // Sponsor card component to avoid using hooks inside map
   const SponsorCard: React.FC<{ sponsor: Sponsor; index: number; tier: string }> = ({ sponsor, index, tier }) => {
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -30,7 +35,7 @@ export const Sponsors: React.FC = () => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: index * 0.1 }}
       >
-        <Enhanced3DCard glowColor={tierColors[tier as keyof typeof tierColors].glow}>
+        <Enhanced3DCard glowColor={tierColors[tier as keyof typeof tierColors].glow} intensity={8}>
           <div className="p-6 text-center max-w-xs">
             <div className="w-24 h-24 mx-auto mb-4 rounded-lg overflow-hidden">
               <img src={sponsor.logo} alt={sponsor.name} className="w-full h-full object-cover" />
@@ -134,10 +139,10 @@ export const Sponsors: React.FC = () => {
                 opacity: 1,
                 y: 0,
                 transition: {
-                  duration: 1.5,
+                  duration: 0.8,
                   ease: 'easeOut',
-                  delayChildren: 0.5,
-                  staggerChildren: 0.2,
+                  delayChildren: 0.2,
+                  staggerChildren: 0.1,
                 }
               }
             }}
@@ -145,13 +150,13 @@ export const Sponsors: React.FC = () => {
           >
             <motion.h1
               className="text-4xl md:text-6xl font-bold text-white mb-6"
-              variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 1.2, ease: 'easeOut' } } }}
+              variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }}
             >
-              Our <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent animate-pulse">Sponsors</span>
+              Our <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Sponsors</span>
             </motion.h1>
             <motion.p
               className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed"
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 1.3, ease: 'easeOut' } } }}
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }}
             >
               We're grateful to our amazing sponsors who support our mission to empower students
               with technology education and innovation opportunities.
@@ -182,6 +187,137 @@ export const Sponsors: React.FC = () => {
               </div>
             </div>
           ))}
+
+          {/* Sponsorship Tiers Benefits Section */}
+          <section className="py-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
+                Sponsorship <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Benefits</span>
+              </h2>
+              
+              <div className="grid md:grid-cols-3 gap-8">
+                {/* Platinum Tier */}
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  <GlassCard className="p-8 h-full border-2 border-gray-300">
+                    <div className="text-center mb-6">
+                      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-gray-200 to-gray-400 flex items-center justify-center">
+                        <span className="text-2xl font-bold text-dark-900">Pt</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Platinum</h3>
+                      <p className="text-gray-300">Premium Partnership</p>
+                    </div>
+                    
+                    <ul className="space-y-3 text-gray-300">
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                        <span>Logo on all event materials</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                        <span>Keynote speaking opportunity</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                        <span>Dedicated booth space</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                        <span>Social media promotion</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                        <span>Workshop hosting rights</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                        <span>Annual report inclusion</span>
+                      </li>
+                    </ul>
+                  </GlassCard>
+                </motion.div>
+
+                {/* Gold Tier */}
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <GlassCard className="p-8 h-full border-2 border-yellow-500">
+                    <div className="text-center mb-6">
+                      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-yellow-400 to-yellow-600 flex items-center justify-center">
+                        <span className="text-2xl font-bold text-dark-900">Au</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Gold</h3>
+                      <p className="text-gray-300">Strategic Partnership</p>
+                    </div>
+                    
+                    <ul className="space-y-3 text-gray-300">
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                        <span>Logo on event banners</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                        <span>Event co-branding opportunity</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                        <span>Medium booth space</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                        <span>Website logo placement</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-secondary-500 rounded-full"></div>
+                        <span>Networking session access</span>
+                      </li>
+                    </ul>
+                  </GlassCard>
+                </motion.div>
+
+                {/* Silver Tier */}
+                <motion.div
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <GlassCard className="p-8 h-full border-2 border-gray-500">
+                    <div className="text-center mb-6">
+                      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-gray-400 to-gray-600 flex items-center justify-center">
+                        <span className="text-2xl font-bold text-white">Ag</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">Silver</h3>
+                      <p className="text-gray-300">Supporting Partnership</p>
+                    </div>
+                    
+                    <ul className="space-y-3 text-gray-300">
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                        <span>Logo on select materials</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                        <span>Small booth space</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                        <span>Website acknowledgment</span>
+                      </li>
+                      <li className="flex items-center space-x-3">
+                        <div className="w-2 h-2 bg-gray-500 rounded-full"></div>
+                        <span>Event attendee access</span>
+                      </li>
+                    </ul>
+                  </GlassCard>
+                </motion.div>
+              </div>
+            </div>
+          </section>
 
           {/* Sponsorship Kit Section */}
           <section className="py-20">
