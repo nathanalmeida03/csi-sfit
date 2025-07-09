@@ -6,8 +6,8 @@
 ## St. Francis Institute of Technology - Student Chapter
 
 </td>
-<td align="center" width="200">
-    <img src="assets/csi-sfit-logo.gif" alt="CSI SFIT Logo" width="180"/>
+<td align="center" width="220">
+    <img src="assets/csi-sfit-logo.gif" alt="CSI SFIT Logo" width="200"/>
 </td>
 </tr>
 </table>
