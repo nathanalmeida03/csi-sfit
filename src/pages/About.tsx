@@ -63,15 +63,13 @@ export const About: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen pt-16 bg-gradient-to-br from-[#2580E4]/15 via-transparent to-[#FFCDB9]/10
-">
-
+    <div className="min-h-screen pt-16 bg-gradient-to-br from-[#2580E4]/15 via-transparent to-[#FFCDB9]/10">
       {/* Hero Section */}
       <section className="relative py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={heroRef}
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
@@ -80,7 +78,7 @@ export const About: React.FC = () => {
               About <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(to right,#42e0d8,#1e30ff)" }}>CSI SFIT</span>
             </h1>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              The Computer Society of India, SFIT Chapter, is a vibrant community of technology enthusiasts 
+              The Computer Society of India, SFIT Chapter, is a vibrant community of technology enthusiasts
               dedicated to advancing computer science education and fostering innovation among students.
             </p>
           </motion.div>
@@ -109,7 +107,7 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Values Section */}
+      {/* Core Values */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -123,7 +121,7 @@ export const About: React.FC = () => {
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
               <motion.div
                 key={value.title}
@@ -140,9 +138,9 @@ export const About: React.FC = () => {
             ))}
           </div>
         </div>
-      </section> 
+      </section>
 
-      {/* New Timeline Section */}
+      {/* Timeline Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -155,6 +153,7 @@ export const About: React.FC = () => {
           </div>
 
           <div className="relative">
+            {/* Timeline Line */}
             <div className="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-[#1e30ff]  to-[#42e0d8]" />
 
             <ul className="space-y-16">
@@ -182,9 +181,9 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Contact Info */}
+      {/* Contact Section */}
       <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <GlassCard className="p-8 text-center">
             <h3 className="text-2xl font-bold text-white mb-6">Visit Us</h3>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8">

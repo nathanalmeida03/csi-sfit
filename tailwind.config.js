@@ -44,7 +44,7 @@ export default {
         'bounce-slow': 'bounce 3s infinite',
         'spin-slow': 'spin 20s linear infinite',
         'gradient': 'gradient 8s linear infinite',
-         'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
+        'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
         'star-movement-top': 'star-movement-top linear infinite alternate',
       },
       keyframes: {
@@ -67,5 +67,4 @@ export default {
       },
     },
   },
-  plugins: [],
-};
+}
