@@ -8,7 +8,7 @@ export const FloatingElements: React.FC = () => {
       {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-4 h-4 border border-primary-500/20 rounded-sm"
+          className="absolute w-4 h-4 border border-[#FFCDB9]/60 bg-[#FFCDB9]/30 rounded-sm"
           initial={{
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
@@ -36,7 +36,7 @@ export const FloatingElements: React.FC = () => {
       {[...Array(8)].map((_, i) => (
         <motion.div
           key={`circle-${i}`}
-          className="absolute w-2 h-2 bg-secondary-500/30 rounded-full"
+          className="absolute w-2 h-2 bg-[#62cff4]/60 rounded-full"
           initial={{
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
