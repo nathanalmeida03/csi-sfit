@@ -5,24 +5,26 @@ interface GlassCardProps {
   children: React.ReactNode;
   className?: string;
   hover3d?: boolean;
-  glowColor?: 'primary' | 'secondary' | 'white';
+  glowColor?: 'primary' | 'secondary' | 'white' | 'cyan'; // 🔹 added 'cyan'
 }
 
 export const GlassCard: React.FC<GlassCardProps> = ({
   children,
   className = '',
   hover3d = true,
-  glowColor = 'primary'
+  glowColor = 'cyan'
 }) => {
+  // 🔹 added cyan glow
   const glowColors = {
     primary: 'hover:shadow-primary-500/20',
     secondary: 'hover:shadow-secondary-500/20',
-    white: 'hover:shadow-white/20'
+    white: 'hover:shadow-white/20',
+    cyan: 'hover:shadow-[0_8px_24px_rgba(54,183,183,0.4)]'
   };
 
   return (
     <motion.div
-      whileHover={hover3d ? { 
+      whileHover={hover3d ? {
         y: -5,
         rotateX: 5,
         rotateY: 5,
