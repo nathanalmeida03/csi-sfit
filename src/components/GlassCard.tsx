@@ -15,9 +15,10 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   glowColor = 'primary'
 }) => {
   const glowColors = {
-    primary: 'hover:shadow-primary-500/20',
-    secondary: 'hover:shadow-secondary-500/20',
-    white: 'hover:shadow-white/20'
+   primary: 'hover:shadow-[0_4px_6px_-1px_#42e0d8]',
+secondary: 'hover:shadow-[0_4px_6px_-1px_#1e30ff]',
+white: 'hover:shadow-[0_4px_6px_-1px_#42e0d8]'
+
   };
 
   return (
@@ -30,7 +31,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
       } : {}}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={`
-        relative backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl
+        relative backdrop-blur-sm bg-white/5   rounded-xl
         shadow-2xl hover:shadow-4xl transition-all duration-300
         ${glowColors[glowColor]} hover:border-white/20
         ${className}
