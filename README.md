@@ -7,7 +7,7 @@
 
 </td>
 <td align="center" width="220">
-    <img src="/csi-sfit-logo.gif" alt="CSI SFIT Logo" width="200"/>
+    <img src="/assets/csi-sfit-logo.gif" alt="CSI SFIT Logo" width="200"/>
 </td>
 </tr>
 </table>
@@ -29,23 +29,6 @@ View the live [website](https://sfit-csi.netlify.app/)
 - 🚀 Technical projects and hackathons
 - 🌐 Networking opportunities with industry experts
 - 📚 Knowledge sharing sessions
-
----
-
-## Getting Started
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/AnleaMJ/csi-sfit.git
-   ```
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-3. **Run the project locally**
-   ```bash
-   npm start
-   ```
 
 ---
 
