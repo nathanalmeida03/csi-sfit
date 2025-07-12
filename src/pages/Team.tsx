@@ -147,7 +147,8 @@ export const Team: React.FC = () => {
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
       <section className="relative py-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />        
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-secondary-500/10" />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={heroRef}
@@ -157,7 +158,7 @@ export const Team: React.FC = () => {
             className="text-center mb-16"
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Our <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">Team</span>
+              Our <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Team</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Meet the passionate individuals who drive innovation and excellence at CSI SFIT. 
@@ -185,8 +186,8 @@ export const Team: React.FC = () => {
                   onClick={() => setSelectedCategory(category.id)}
                   className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
                     selectedCategory === category.id
-                      ? 'bg-gradient-to-r from-[#36B7B7] to-[#2AA198] text-white shadow-lg shadow-[#36B7B7]/25'
-                    : 'text-gray-300 hover:bg-white/10 hover:text-white border border-white/10'
+                      ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25'
+                      : 'bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white border border-white/10'
                   }`}
                 >
                   <Icon className="w-4 h-4" />

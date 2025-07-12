@@ -32,7 +32,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
       } : {}}
       transition={{ duration: 0.3, ease: "easeOut" }}
       className={`
-        relative backdrop-blur-sm bg-white/5 border border-white/10 rounded-xl
+        relative backdrop-blur-sm bg-white/5   rounded-xl
         shadow-2xl hover:shadow-4xl transition-all duration-300
         ${glowColors[glowColor]} hover:border-white/20
         ${className}
