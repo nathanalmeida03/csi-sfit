@@ -136,6 +136,7 @@ export const Events: React.FC = () => {
     return matchesCategory && matchesSearch;
   });
 
+  // Custom gradient and color helpers using new palette
   const getCategoryColor = (category: string) => {
     const colors = {
       workshop: 'from-blue-500 to-blue-700',
@@ -158,7 +159,275 @@ export const Events: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-16">
-      {/* Component content continues here... */}
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden">
+        {/* Custom gradient background using hex codes */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            ref={heroRef}
+            initial={{ opacity: 0, y: 50 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              Events & <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">Workshops</span>
+
+              
+            </h1>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Join our exciting events, workshops, and competitions designed to enhance your technical skills 
+              and connect with the tech community.
+            </p>
+          </motion.div>
+
+          {/* Search and Filter */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-12"
+          >
+            <GlassCard className="p-6">
+              <div className="flex flex-col md:flex-row gap-4 items-center">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search events..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#36B7B7]/60 focus:border-[#FFF5D6]/40"
+
+                  />
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Filter className="w-5 h-5 text-gray-400" />
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#36B7B7]/60 focus:border-[#FFF5D6]/40"
+
+                  >
+                    {categories.map(category => (
+                      <option key={category.id} value={category.id} className="bg-dark-800">
+                        {category.label} ({category.count})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </GlassCard>
+          </motion.div>
+
+          {/* Category Filters */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-3 mb-12"
+          >
+            {categories.map((category, index) => (
+              <motion.button
+                key={category.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={heroInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`relative z-10 px-4 py-2 rounded-lg font-medium backdrop-blur-sm bg-white/5 transition-all duration-300 ${
+                selectedCategory === category.id
+                  ? 'bg-gradient-to-r from-[#36B7B7] to-[#2AA198] text-white shadow-lg shadow-[#36B7B7]/25'
+                  : 'text-gray-300 hover:bg-white/10 hover:text-white border border-white/10'
+              }`}
+
+              >
+                {category.label}
+                <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded-full">
+                  {category.count}
+                </span>
+              </motion.button>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Events Grid */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedCategory + searchTerm}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              ref={eventsRef}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredEvents.map((event, index) => (
+                <motion.div
+                  key={event.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={eventsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileHover={{ y: -10 }}
+                >
+                  <GlassCard className="group cursor-pointer transition-all duration-300 transform hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(54,183,183,0.3)]">
+
+                    {/* Event Image */}
+                    <div className="relative h-48 overflow-hidden">
+                      <motion.img
+                        src={event.image}
+                        alt={event.title}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-dark-800/80 to-transparent" />
+                      
+                      {/* Status Badge */}
+                      <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold border ${getStatusColor(event.status)}`}>
+                        {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
+                      </div>
+
+                    {/* Featured Badge */}
+                  {event.featured && (
+                    <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold text-white bg-gradient-to-r from-[#2A2A2A] via-[#3F3F3F] to-[#1A1A1A]">
+                      Featured
+                    </div>
+                  )}
+
+                      {/* Category Badge */}
+                      <div className={`absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r ${getCategoryColor(event.category)} text-white`}>
+                        {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
+                      </div>
+                    </div>
+
+                    {/* Event Content */}
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-[#2580E4] transition-colors">
+                        {event.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                        {event.description}
+                      </p>
+
+                      {/* Event Details */}
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center text-sm text-gray-300">
+                          <Calendar className="w-4 h-4 text-primary-500 mr-2" />
+                          {new Date(event.date).toLocaleDateString('en-US', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })}
+                        </div>
+                        <div className="flex items-center text-sm text-gray-300">
+                          <Clock className="w-4 h-4 text-secondary-500 mr-2" />
+                          {event.time}
+                        </div>
+                        <div className="flex items-center text-sm text-gray-300">
+                          <MapPin className="w-4 h-4 text-purple-500 mr-2" />
+                          {event.location}
+                        </div>
+                        <div className="flex items-center text-sm text-gray-300">
+                          <Users className="w-4 h-4 text-pink-500 mr-2" />
+                          {event.attendees}/{event.maxAttendees} attendees
+                        </div>
+                      </div>
+
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {event.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="px-2 py-1 text-xs bg-white/10 text-gray-300 rounded-full border border-white/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Attendee Progress */}
+                      <div className="mb-4">
+                        <div className="flex justify-between text-sm text-gray-400 mb-1">
+                          <span>Registration</span>
+                          <span>{Math.round((event.attendees / event.maxAttendees) * 100)}%</span>
+                        </div>
+                        <div className="w-full bg-white/10 rounded-full h-2">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={eventsInView ? { width: `${(event.attendees / event.maxAttendees) * 100}%` } : {}}
+                            transition={{ duration: 1, delay: index * 0.1 }}
+                            className="h-2 bg-gradient-to-r from-[#0F2C59] via-[#36CFCF] to-[#FFF5D6] rounded-full"
+
+                          />
+                        </div>
+                      </div>
+
+                      {/* Action Button */}
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      className={`w-full py-3 px-4 rounded-lg font-medium transition-all duration-300 flex items-center justify-center space-x-2 ${
+                      event.status === 'upcoming'
+                        ? 'bg-gradient-to-r from-[#2580E4] to-[#1B6DC1] text-white hover:shadow-[0_4px_8px_0_#2580E433,0_5px_12px_0_#36B7B766]'
+                        : event.status === 'ongoing'
+                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:shadow-lg hover:shadow-blue-500/25'
+                        : 'bg-white/10 text-gray-400 border border-white/20'
+                    }`}
+
+                        disabled={event.status === 'completed'}
+                      >
+                        <span>
+                          {event.status === 'upcoming' ? 'Register Now' : 
+                           event.status === 'ongoing' ? 'Join Event' : 'Event Completed'}
+                        </span>
+                        {event.status !== 'completed' && <ExternalLink className="w-4 h-4" />}
+                      </motion.button>
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* No Results */}
+          {filteredEvents.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center py-20"
+            >
+              <GlassCard className="p-12 max-w-md mx-auto">
+                <Calendar className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-white mb-2">No Events Found</h3>
+                <p className="text-gray-400">
+                  No events match your current search criteria. Try adjusting your filters.
+                </p>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    setSelectedCategory('all');
+                    setSearchTerm('');
+                  }}
+                  className="mt-4 px-6 py-2 bg-gradient-to-r from-[#2580E4] to-[#1B6DC1] text-white rounded-lg font-medium"
+
+                >
+                  Clear Filters
+                </motion.button>
+              </GlassCard>
+            </motion.div>
+          )}
+        </div>
+      </section>
     </div>
   );
 };
+
