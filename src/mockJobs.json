@@ -1,0 +1,74 @@
+[
+  {
+    "id": "mock-1",
+    "position": "Senior Frontend Developer",
+    "company": "TechCorp",
+    "location": "Remote",
+    "url": "https://example.com/job1",
+    "description": "We are looking for a Senior Frontend Developer to join our team. You will be responsible for building user interfaces using React, TypeScript, and modern web technologies.",
+    "tags": ["React", "TypeScript", "JavaScript", "CSS", "HTML"],
+    "company_logo": "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "salary_min": 80000,
+    "salary_max": 120000
+  },
+  {
+    "id": "mock-2",
+    "position": "Full Stack Engineer",
+    "company": "StartupXYZ",
+    "location": "Remote",
+    "url": "https://example.com/job2",
+    "description": "Join our growing startup as a Full Stack Engineer. Work with Node.js, React, and cloud technologies to build scalable applications.",
+    "tags": ["Node.js", "React", "AWS", "MongoDB", "Docker"],
+    "company_logo": "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "salary_min": 70000,
+    "salary_max": 100000
+  },
+  {
+    "id": "mock-3",
+    "position": "DevOps Engineer",
+    "company": "CloudTech Solutions",
+    "location": "Remote",
+    "url": "https://example.com/job3",
+    "description": "We need a DevOps Engineer to help us scale our infrastructure. Experience with Kubernetes, CI/CD, and cloud platforms required.",
+    "tags": ["Kubernetes", "Docker", "AWS", "CI/CD", "Terraform"],
+    "company_logo": "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "salary_min": 90000,
+    "salary_max": 130000
+  },
+  {
+    "id": "mock-4",
+    "position": "UX/UI Designer",
+    "company": "DesignStudio",
+    "location": "Remote",
+    "url": "https://example.com/job4",
+    "description": "Creative UX/UI Designer needed to design beautiful and intuitive user experiences. Proficiency in Figma and design systems required.",
+    "tags": ["Figma", "UI/UX", "Design Systems", "Prototyping", "User Research"],
+    "company_logo": "https://images.pexels.com/photos/3184639/pexels-photo-3184639.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "salary_min": 60000,
+    "salary_max": 90000
+  },
+  {
+    "id": "mock-5",
+    "position": "Backend Developer",
+    "company": "DataFlow Inc",
+    "location": "Remote",
+    "url": "https://example.com/job5",
+    "description": "Backend Developer position focusing on building robust APIs and microservices. Experience with Python, Django, and PostgreSQL preferred.",
+    "tags": ["Python", "Django", "PostgreSQL", "REST API", "Microservices"],
+    "company_logo": "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "salary_min": 75000,
+    "salary_max": 110000
+  },
+  {
+    "id": "mock-6",
+    "position": "Product Manager",
+    "company": "InnovateLab",
+    "location": "Remote",
+    "url": "https://example.com/job6",
+    "description": "Product Manager role for a fast-growing SaaS company. Lead product strategy, work with engineering teams, and drive product roadmap.",
+    "tags": ["Product Management", "Agile", "SaaS", "Analytics", "Strategy"],
+    "company_logo": "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "salary_min": 85000,
+    "salary_max": 125000
+  }
+]
