@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
@@ -163,7 +164,6 @@ export const Events: React.FC = () => {
       <section className="relative py-20 overflow-hidden">
         {/* Custom gradient background using hex codes */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />
-        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={heroRef}
@@ -174,8 +174,6 @@ export const Events: React.FC = () => {
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Events & <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">Workshops</span>
-
-              
             </h1>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Join our exciting events, workshops, and competitions designed to enhance your technical skills 
