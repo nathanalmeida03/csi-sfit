@@ -46,7 +46,7 @@ export const Home: React.FC = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-16">
-         <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-secondary-500/10" />
         
         <motion.div
           ref={heroRef}
@@ -73,7 +73,7 @@ export const Home: React.FC = () => {
             className="mb-8"
           >
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-500 via-secondary-500 to-primary-500 bg-clip-text text-transparent animate-gradient bg-300">
                 Computer Society
               </span>
               <br />
@@ -107,13 +107,14 @@ export const Home: React.FC = () => {
           >
             <Link
               to="/join"
-              className="group relative px-8 py-4 bg-gradient-to-r from-[#36B7B7] to-[#2AA198] text-white font-semibold rounded-xl shadow-lg shadow-[#36B7B7]/25 hover:shadow-[#36B7B7]/40 transition-all duration-300 transform hover:scale-105"
+              className="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-primary-500/25 transition-all duration-300 transform hover:scale-105"
             >
               <span className="flex items-center space-x-2">
                 <span>Join CSI SFIT</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </span>
-            </Link>            
+            </Link>
+            
             <Link
               to="/events"
               className="group px-8 py-4 border border-white/20 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/5 transition-all duration-300 transform hover:scale-105"

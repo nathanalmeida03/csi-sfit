@@ -4,11 +4,11 @@ import { motion } from 'framer-motion';
 export const FloatingElements: React.FC = () => {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
-      {/* Floating geometric shapes (outline squares) */}
+      {/* Floating geometric shapes */}
       {[...Array(12)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-4 h-4 border border-[#FFCDB9]/60 rounded-sm" // outline only, no background
+          className="absolute w-4 h-4 border border-[#FFCDB9]/60 bg-[#FFCDB9]/30 rounded-sm"
           initial={{
             x: Math.random() * window.innerWidth,
             y: Math.random() * window.innerHeight,
@@ -22,7 +22,7 @@ export const FloatingElements: React.FC = () => {
           transition={{
             duration: 10 + Math.random() * 20,
             repeat: Infinity,
-            ease: 'linear',
+            ease: "linear",
             delay: Math.random() * 5,
           }}
           style={{
@@ -49,7 +49,7 @@ export const FloatingElements: React.FC = () => {
           transition={{
             duration: 8 + Math.random() * 12,
             repeat: Infinity,
-            ease: 'easeInOut',
+            ease: "easeInOut",
             delay: Math.random() * 3,
           }}
           style={{
