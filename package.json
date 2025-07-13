@@ -18,7 +18,7 @@
     "@tsparticles/react": "^3.0.0",
     "framer-motion": "^11.5.4",
     "gsap": "^3.13.0",
-    "lucide-react": "^0.344.0",
+    "lucide-react": "^0.525.0",
     "ogl": "^1.0.11",
     "react": "^18.3.1",
     "react-awesome-reveal": "^4.3.1",
