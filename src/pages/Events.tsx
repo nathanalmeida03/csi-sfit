@@ -136,6 +136,7 @@ export const Events: React.FC = () => {
     return matchesCategory && matchesSearch;
   });
 
+
   // Custom gradient and color helpers using new palette
   const getCategoryColor = (category: string) => {
     const colors = {
@@ -174,8 +175,6 @@ export const Events: React.FC = () => {
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Events & <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">Workshops</span>
-
-              
             </h1>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Join our exciting events, workshops, and competitions designed to enhance your technical skills 
@@ -430,3 +429,4 @@ export const Events: React.FC = () => {
     </div>
   );
 };
+    
