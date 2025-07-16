@@ -128,6 +128,7 @@ export const Sponsors: React.FC = () => {
     <div className="min-h-screen pt-16 bg-dark-900 text-white">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={heroRef}
@@ -152,7 +153,7 @@ export const Sponsors: React.FC = () => {
               className="text-4xl md:text-6xl font-bold text-white mb-6"
               variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }}
             >
-              Our <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Sponsors</span>
+              Our <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">Sponsors</span>
             </motion.h1>
             <motion.p
               className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed"
@@ -169,7 +170,7 @@ export const Sponsors: React.FC = () => {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
-            Current <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Partners</span>
+            Current <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">Partners</span>
           </h2>
 
           {['platinum', 'gold', 'silver', 'bronze'].map((tier) => (

@@ -5,13 +5,14 @@ import {
   Menu, X, Code, Users, Calendar, Camera, Award, Mail
 } from 'lucide-react';
 
+import logo from '../logo.png'; // Assuming logo.png is in src/assets
+
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Show navbar only if cursor is in top half
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setShowNavbar(e.clientY < window.innerHeight / 2);
@@ -37,7 +38,6 @@ export const Navigation: React.FC = () => {
     { path: '/team', label: 'Team', icon: Users },
     { path: '/gallery', label: 'Gallery', icon: Camera },
     { path: '/sponsors', label: 'Sponsors', icon: Award },
-    //{ path: '/join', label: 'Join CSI', icon: UserPlus },
     { path: '/contact', label: 'Contact', icon: Mail },
   ];
 
@@ -58,15 +58,15 @@ export const Navigation: React.FC = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
-              <Link to="/" className="flex items-center space-x-2 group">
-                <motion.div
-                  whileHover={{ scale: 1.1, rotateY: 180 }}
+              <Link to="/" className="flex items-center space-x-3 group">
+                <motion.img
+                  whileHover={{ scale: 1.05, rotate: 5 }}
                   transition={{ duration: 0.3 }}
-                  className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center"
-                >
-                  <Code className="w-6 h-6 text-white" />
-                </motion.div>
-                <span className="text-xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
+                  src={logo}
+                  alt="CSI SFIT Logo"
+                  className="w-10 h-10 object-contain rounded-md"
+                />
+                <span className="text-xl font-bold bg-gradient-to-r from-[#1A5AFF] to-[#00FFF0] bg-clip-text text-transparent">
                   CSI SFIT
                 </span>
               </Link>
@@ -83,8 +83,8 @@ export const Navigation: React.FC = () => {
                       to={item.path}
                       className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 group ${
                         isActive
-                          ? 'text-primary-500'
-                          : 'text-gray-300 hover:text-white'
+                          ? 'text-[#00FFF0]'
+                          : 'text-gray-300 hover:text-[#00FFF0]'
                       }`}
                     >
                       <div className="flex items-center space-x-2">
@@ -94,7 +94,7 @@ export const Navigation: React.FC = () => {
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className="absolute inset-0 bg-primary-500/10 border border-primary-500/20 rounded-lg"
+                          className="absolute inset-0 bg-[#1A5AFF]/10 border border-[#1A5AFF]/20 rounded-lg"
                           transition={{ duration: 0.2 }}
                         />
                       )}
@@ -136,7 +136,7 @@ export const Navigation: React.FC = () => {
                         onClick={() => setIsOpen(false)}
                         className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                           isActive
-                            ? 'bg-primary-500/10 text-primary-500 border border-primary-500/20'
+                            ? 'bg-[#1A5AFF]/10 text-[#1A5AFF] border border-[#1A5AFF]/20'
                             : 'text-gray-300 hover:text-white hover:bg-white/5'
                         }`}
                       >
