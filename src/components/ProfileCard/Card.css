@@ -111,6 +111,10 @@
   .back p {
     font-size: 0.8rem;
   }
+
+  .back .socials p {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -122,6 +126,10 @@
   .back p {
     font-size: 0.8rem;
   }
+
+  .back .socials p {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 320px) {
@@ -132,5 +140,9 @@
 
   .back p {
     font-size: 0.8rem;
+  }
+
+  .back .socials p {
+    font-size: 1.1rem;
   }
 }
