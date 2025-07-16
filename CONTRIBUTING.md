@@ -71,7 +71,7 @@ We welcome contributions from everyone. Please read these guidelines carefully t
 
 Example:
 
-```
+```markdown
 Add responsive navigation bar
 
 - Implemented mobile-friendly UI
