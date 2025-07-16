@@ -104,7 +104,7 @@ export const Membership: React.FC = () => {
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
       <section className="relative py-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-500/10 via-transparent to-secondary-500/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
