@@ -20,7 +20,7 @@ const StarBorder = <T extends React.ElementType = "button">({
 }: StarBorderProps<T>) => {
   const Component = as || "button";
 
-  return (
+  return ( 
     <Component 
       className={`relative inline-block overflow-hidden rounded-[20px] ${className}`} 
       {...rest}
