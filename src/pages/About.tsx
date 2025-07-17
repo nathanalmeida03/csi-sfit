@@ -64,142 +64,187 @@ export const About: React.FC = () => {
 
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-br from-[#2580E4]/15 via-transparent to-[#FFCDB9]/10">
+
       {/* Hero Section */}
-      <section className="relative py-20">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            ref={heroRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              About <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(to right,#42e0d8,#1e30ff)" }}>CSI SFIT</span>
-            </h1>
-            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              The Computer Society of India, SFIT Chapter, is a vibrant community of technology enthusiasts
-              dedicated to advancing computer science education and fostering innovation among students.
-            </p>
-          </motion.div>
+<section className="relative bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20 py-20">
+  <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      ref={heroRef}
+      initial={{ opacity: 0, y: 50 }}
+      animate={heroInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8 }}
+      className="text-center mb-16"
+    >
+      <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6">
+        About <span className="gap-2 bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">
+  CSI SFIT
+</span>
 
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
-          >
-            {[
-              { count: '500+', label: 'Active Members' },
-              { count: '9+', label: 'Years Active' },
-              { count: '50+', label: 'Events Organized' },
-              { count: '25+', label: 'Awards Won' },
-            ].map((stat, i) => (
-              <StarBorder key={i} color="#FFCDB9" thickness={2}>
-                <GlassCard className="p-4 text-center w-72 h-22">
-                  <div className="text-2xl font-bold text-[#36B7B7] mb-2">{stat.count}</div>
-                  <div className="text-gray-400">{stat.label}</div>
-                </GlassCard>
-              </StarBorder>
-            ))}
-          </motion.div>
+      </h1>
+      <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+        The Computer Society of India, SFIT Chapter, is a vibrant community of technology enthusiasts 
+        dedicated to advancing computer science education and fostering innovation among students.
+      </p>
+    </motion.div>
+
+    {/* Stats */}
+   <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={heroInView ? { opacity: 1, y: 0 } : {}}
+  transition={{ duration: 1 }}
+  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-20"
+>
+  {[
+    { count: '500+', label: 'Active Members' },
+    { count: '9+', label: 'Years Active' },
+    { count: '50+', label: 'Events Organized' },
+    { count: '25+', label: 'Awards Won' },
+  ].map((stat, i) => (
+    <StarBorder key={i} color="#FFCDB9" thickness={2}>
+      <GlassCard className="flex flex-col justify-center items-center p-4 sm:p-6 text-center w-full h-full">
+        <div className="text-xl sm:text-2xl font-bold text-[#36B7B7] mb-1 break-words">
+          {stat.count}
         </div>
-      </section>
+        <div className="text-sm sm:text-base text-gray-400">{stat.label}</div>
+      </GlassCard>
+    </StarBorder>
+  ))}
+</motion.div>
 
-      {/* Core Values */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">
-              Our Core <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(to right, #2580E4, #36B7B7)" }}>Values</span>
-            </h2>
-          </motion.div>
+  </div>
+</section>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 50 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 * index }}
-              >
-                <TiltedCardWithContent
-                  icon={value.icon}
-                  title={value.title}
-                  description={value.description}
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+{/* Values Section */} 
 
-      {/* Timeline Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Our <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(to right, #2580E4, #36B7B7)" }}>Journey</span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              From humble beginnings to becoming a leading tech community
-            </p>
-          </div>
 
-          <div className="relative">
-            {/* Timeline Line */}
-            <div className="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-[#1e30ff]  to-[#42e0d8]" />
+<section className="py-20">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={heroInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="text-center mb-16"
+    >
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">
+        Our Core{" "}
+       
 
-            <ul className="space-y-16">
-              {timeline.map((item, index) => (
-                <li
-                  key={item.year}
-                  ref={(el) => (timelineRefs.current[index] = el)}
-                  className={`relative flex flex-col md:flex-row items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
-                >
-                  <div className="md:w-1/2 w-full px-4">
-                    <GlassCard className="p-6 no-hover">
-                      <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${item.color} text-white mb-3`}>
-                        {item.year}
-                      </span>
-                      <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
-                      <p className="text-gray-400">{item.description}</p>
-                    </GlassCard>
-                  </div>
+        <span className="gap-2 bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">
+  Values
+</span>
+      </h2>
+    </motion.div>
 
-                  <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#f7baa8] rounded-full border-4 border-dark-800 z-10" />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {values.map((value, index) => (
+        <motion.div
+          key={value.title}
+          initial={{ opacity: 0, y: 50 }}
+          animate={heroInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 * index }}
+        >
+          {/* Card with gradient overlay + backdrop-blur */}
+          <div className="relative rounded-xl overflow-hidden hover:scale-105 transition-transform">
+            {/* Gradient + blur overlay */}
+            <div
+              className="
+                absolute inset-0 
+                bg-gradient-to-br from-white/10 via-transparent to-transparent 
+                backdrop-blur-sm
+                pointer-events-none
+              "
+            ></div>
 
-      {/* Contact Section */}
-      <section className="py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GlassCard className="p-8 text-center">
-            <h3 className="text-2xl font-bold text-white mb-6">Visit Us</h3>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-6 h-6 text-[#1e30ff]" />
-                <span className="text-[#f7baa8]">St. Francis Institute of Technology, Mumbai</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Calendar className="w-6 h-6 text-secondary-500" />
-                <span className="text-[#f7baa8]">Mon - Fri, 9:00 AM - 5:00 PM</span>
-              </div>
+            {/* Card Content */}
+            <div className="relative  text-white">
+              <TiltedCardWithContent
+                icon={value.icon}
+                title={value.title}
+                description={value.description}
+              />
             </div>
-          </GlassCard>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+{/* Timeline Section */}
+<section className="py-20">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-6">
+        Our <span className="gap-2 bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">
+ Journey
+</span>
+      </h2>
+      <p className="text-base sm:text-lg text-gray-400 max-w-3xl mx-auto">
+        From humble beginnings to becoming a leading tech community
+      </p>
+    </div>
+
+    <div className="relative">
+      <div className="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-[#1e30ff] to-[#42e0d8]" />
+
+      <ul className="space-y-16">
+        {timeline.map((item, index) => (
+          <li
+            key={item.year}
+            ref={(el) => (timelineRefs.current[index] = el)}
+            className={`relative flex flex-col md:flex-row items-center ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+          >
+            <div className="md:w-1/2  w-full px-4">
+              <GlassCard className="p-6 backdrop-blur-sm no-hover">
+                <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r ${item.color} text-white mb-3`}>
+                  {item.year}
+                </span>
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-sm sm:text-base text-gray-400">{item.description}</p>
+              </GlassCard>
+            </div>
+
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-[#f7baa8] rounded-full border-4 border-dark-800 z-10" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+
+
+{/* Contact Info */}
+<section className="py-20">
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <GlassCard className="p-8">
+      <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 text-center">Visit Us</h3>
+
+      <div className="flex flex-col gap-4 items-center">
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center space-x-3">
+            <MapPin className="w-8 h-8 text-[#1e30ff] flex-shrink-0" />
+            <span className="text-neutral-400 text-sm sm:text-base">
+              St. Francis Institute of Technology, Mumbai
+            </span>
+          </div>
+
+          <div className="flex items-center space-x-3">
+            <Calendar className="w-8 h-8 text-secondary-500 flex-shrink-0" />
+            <span className="text-neutral-400 text-sm sm:text-base">
+              Mon - Fri, 9:00 AM - 5:00 PM
+            </span>
+          </div>
         </div>
-      </section>
+      </div>
+    </GlassCard>
+  </div>
+</section>
+
+
+
     </div>
   );
 };
