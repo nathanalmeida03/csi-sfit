@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom"; // <--- ADD THIS LINE
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Check, Star, Users, Calendar, Award, Book, Code, Lightbulb, ArrowRight } from 'lucide-react';
@@ -6,9 +7,14 @@ import { Enhanced3DCard } from '../components/Enhanced3DCard';
 import { GlassCard } from '../components/GlassCard';
 
 export const Membership: React.FC = () => {
+  const location = useLocation(); // <--- ADD THIS LINE
+
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    // Only scroll to top if we're on the membership page
+    if (location.pathname === "/membership") {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
 
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [benefitsRef, benefitsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
