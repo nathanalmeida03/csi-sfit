@@ -28,7 +28,6 @@ export const Contact: React.FC = () => {
     message: ''
   });
 
-  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -166,7 +165,8 @@ export const Contact: React.FC = () => {
                       animate={heroInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.6, delay: 0.1 * index }}
                     >
-                      <Enhanced3DCard intensity={5} className="hover:shadow-white/20 hover:shadow-lg" >
+                      {/* Only the teal/cyan glow on hover now */}
+                      <Enhanced3DCard intensity={5} className="transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(54,183,183,0.3)]">
                         <div className="p-6 ">
                           <div className="flex items-start space-x-4 ">
                             <div className={`w-12 h-12 bg-gradient-to-br from-white/10 to-white/5 rounded-lg flex items-center justify-center ${info.color}`}>
@@ -195,10 +195,10 @@ export const Contact: React.FC = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="mb-4" // This margin-bottom will create separation before the next section
+                className="mb-4"
               >
                 <h3 className="text-xl font-semibold text-white mb-4">Follow Us</h3>
-                <div className="flex space-x-6"> {/* Increased space-x from 4 to 6 */}
+                <div className="flex space-x-6">
                   {socialLinks.map((social, index) => {
                     const Icon = social.icon;
                     return (
@@ -209,9 +209,9 @@ export const Contact: React.FC = () => {
                         rel="noopener noreferrer"
                         whileHover={{ scale: 1.1, y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`w-16 h-16 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg flex items-center justify-center text-gray-400 transition-colors ${social.color}`} // Corrected line 196
+                        className={`w-16 h-16 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg flex items-center justify-center text-gray-400 transition-colors ${social.color}`}
                       >
-                        <Icon className="w-8 h-8" /> {/* Increased icon size to w-8 h-8 */}
+                        <Icon className="w-8 h-8" />
                       </motion.a>
                     );
                   })}
@@ -278,7 +278,7 @@ export const Contact: React.FC = () => {
       </section>
 
       {/* Location Section */}
-      <section className="pt-10 pb-10"> {/* Adjusted padding here */}
+      <section className="pt-10 pb-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
