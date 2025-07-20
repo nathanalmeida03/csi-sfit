@@ -1,422 +1,306 @@
-import React, { useState, useEffect } from 'react'; // Added useEffect!
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Check, Star, Users, Calendar, Award, Book, Code, Lightbulb, ArrowRight } from 'lucide-react';
-import { Enhanced3DCard } from '../components/Enhanced3DCard';
 import { GlassCard } from '../components/GlassCard';
+import { Enhanced3DCard } from '../components/Enhanced3DCard';
+import {
+  IconBrandGmail,
+  IconPhoneCall,
+  IconBrandGoogleMaps,
+  IconClockHour9,
+  IconBrandFacebook,
+  IconBrandX,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconSend,
+  IconBrandLinktree
+} from '@tabler/icons-react';
+import emailjs from '@emailjs/browser';
+import { Icon } from 'lucide-react';
 
-export const Membership: React.FC = () => {
-  // Scroll to top on mount!
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+export const Contact: React.FC = () => {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  const [benefitsRef, benefitsInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
-    year: '',
-    department: '',
-    interests: [] as string[]
+    subject: '',
+    message: ''
   });
-
-  const membershipBenefits = [
-    {
-      icon: Code,
-      title: 'Technical Workshops',
-      description: 'Access to exclusive hands-on workshops on latest technologies',
-      color: 'text-primary-500'
-    },
-    {
-      icon: Users,
-      title: 'Networking Events',
-      description: 'Connect with industry professionals and like-minded peers',
-      color: 'text-secondary-500'
-    },
-    {
-      icon: Book,
-      title: 'Learning Resources',
-      description: 'Free access to premium courses, books, and learning materials',
-      color: 'text-purple-500'
-    },
-    {
-      icon: Award,
-      title: 'Certification Programs',
-      description: 'Industry-recognized certificates and skill validation',
-      color: 'text-pink-500'
-    },
-    {
-      icon: Calendar,
-      title: 'Priority Access',
-      description: 'Early registration for events, competitions, and hackathons',
-      color: 'text-blue-500'
-    },
-    {
-      icon: Lightbulb,
-      title: 'Innovation Projects',
-      description: 'Opportunity to work on real-world projects and research',
-      color: 'text-green-500'
-    }
-  ];
-
-  const membershipStats = [
-    { label: 'Active Members', value: '500+', icon: Users },
-    { label: 'Events Per Year', value: '50+', icon: Calendar },
-    { label: 'Workshops Conducted', value: '100+', icon: Code },
-    { label: 'Alumni Network', value: '2000+', icon: Award }
-  ];
-
-  const interestOptions = [
-    'Web Development',
-    'Mobile App Development',
-    'Artificial Intelligence',
-    'Machine Learning',
-    'Data Science',
-    'Cybersecurity',
-    'Cloud Computing',
-    'DevOps',
-    'UI/UX Design',
-    'Blockchain',
-    'IoT',
-    'Game Development'
-  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Membership form submitted:', formData);
-  };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJNK7wRbWSHLQMthYsHf82uviKiJQM-vrIAPqti_OceIvLgTjmiGVegLgIZ0EOkRHI/exec'; 
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    emailjs.send(
+      'service_khb9g4c',
+      'template_qceaydk',
+      {
+        name: formData.name,
+        email: formData.email,
+        title: formData.subject,
+        message: formData.message,
+      },
+      'Y53Ks5mSa6DtLbiHI'
+    ).then(() => {
+      alert('Message sent!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    }, () => {
+      alert('Failed to send message. Please try again.');
     });
   };
 
-  const handleInterestToggle = (interest: string) => {
-    setFormData({
-      ...formData,
-      interests: formData.interests.includes(interest)
-        ? formData.interests.filter(i => i !== interest)
-        : [...formData.interests, interest]
-    });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const contactInfo = [
+    {
+      icon: IconBrandGmail,
+      title: 'Email',
+      content: 'csi@sfit.ac.in',
+      link: 'mailto:csi@sfit.ac.in',
+      color: 'text-primary-500'
+    },
+    {
+      icon: IconPhoneCall,
+      title: 'Phone',
+      content: (
+        <p className="text-gray-300 space-x-2">
+          <span>
+            <a href="tel:+919325209355" className="hover:text-[#2580E4] transition-colors">
+              Aryan Brahmane - +91 93252 09355
+            </a>
+          </span>
+          <span className="mx-2 text-white/30">|</span>
+          <span>
+            <a href="tel:+919372937532" className="hover:text-[#2580E4] transition-colors">
+              Rayan Pawar - +91 93729 37532
+            </a>
+          </span>
+          <span className="mx-2 text-white/30">|</span>
+          <span>
+            <a href="tel:+917499531769" className="hover:text-[#2580E4] transition-colors">
+              Shahiil Shet - +91 74995 31769
+            </a>
+          </span>
+        </p>
+      ),
+      color: 'text-secondary-500'
+    },
+    {
+      icon: IconBrandGoogleMaps,
+      title: 'Address',
+      content: 'St. Francis Institute of Technology, Mount Poinsur, S.V.P. Road, Borivali West, Mumbai - 400103',
+      link: 'https://maps.app.goo.gl/Zh8Tk7Wj2m7pSGQJ6',
+      color: 'text-purple-500'
+    },
+    {
+      icon: IconClockHour9,
+      title: 'Office Hours',
+      content: 'Monday - Friday: 9:00 AM - 5:00 PM',
+      color: 'text-pink-500'
+    }
+  ];
+
+  const socialLinks = [
+    { icon: IconBrandFacebook, link: 'https://www.facebook.com/csi.sfit/', color: 'hover:text-blue-500' },
+    { icon: IconBrandX, link: 'https://x.com/csi_sfit?lang=ar-x-fm', color: 'hover:text-sky-500' },
+    { icon: IconBrandInstagram, link: 'https://www.instagram.com/csi_sfit?igsh=YTdsdGM0bG9ieHRv', color: 'hover:text-pink-500' },
+    { icon: IconBrandLinkedin, link: 'https://www.linkedin.com/company/csi-sfit/', color: 'hover:text-blue-600' },
+    { icon: IconBrandLinktree, link: ' https://linktr.ee/CSI_SFIT', color: 'hover:text-green-500' }
+  ];
 
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="relative py-20">
+      <section className="relative py-12 sm:py-20">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1e30ff]/20 via-[#42e0d8]/10 to-[#f7baa8]/20" />
-        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             ref={heroRef}
             initial={{ opacity: 0, y: 50 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-16"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Join <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">CSI SFIT</span>
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6">
+              Get In <span className="bg-gradient-to-r from-[#40E0D0] to-[#1A5AFF] bg-clip-text text-transparent">Touch</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Become part of a vibrant community of tech enthusiasts, innovators, and future leaders. 
-              Access exclusive opportunities and accelerate your career in technology.
+            <p className="text-base sm:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              Have questions about CSI SFIT? Want to collaborate or join our community? We'd love to hear from you.
             </p>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-          >
-            {membershipStats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={heroInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.6, delay: 0.1 * index }}
-                >
-                  <GlassCard className="p-6 text-center">
-                    <Icon className="w-8 h-8 text-primary-500 mx-auto mb-3" />
-                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                    <div className="text-gray-400 text-sm">{stat.label}</div>
-                  </GlassCard>
-                </motion.div>
-              );
-            })}
           </motion.div>
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section className="py-20">
+      {/* Contact Content */}
+      <section className="py-8 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            ref={benefitsRef}
-            initial={{ opacity: 0, y: 30 }}
-            animate={benefitsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Membership <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">Benefits</span>
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Unlock exclusive opportunities and resources designed to accelerate your tech journey
-            </p>
-          </motion.div>
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Contact Info & Social */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={heroInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-12 lg:mb-0"
+            >
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Contact Information</h2>
+              <div className="space-y-6 mb-8">
+                {contactInfo.map((info, index) => {
+                  const Icon = info.icon;
+                  return (
+                    <motion.div
+                      key={info.title}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.6, delay: 0.1 * index }}
+                    >
+                      <Enhanced3DCard intensity={5} className="transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(54,183,183,0.3)]">
+                        <div className="p-4 sm:p-6">
+                          <div className="flex items-start space-x-3 sm:space-x-4">
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-white/10 to-white/5 rounded-lg flex items-center justify-center ${info.color}`}>
+                              <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
+                            </div>
+                            <div>
+                              <h3 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">{info.title}</h3>
+                              {info.link ? (
+                                <a href={info.link} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-[#2580E4] transition-colors">
+                                  {info.content}
+                                </a>
+                              ) : (
+                                <p className="text-gray-300">{info.content}</p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+                      </Enhanced3DCard>
+                    </motion.div>
+                  );
+                })}
+              </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {membershipBenefits.map((benefit, index) => {
-              const Icon = benefit.icon;
-              return (
-                <motion.div
-                  key={benefit.title}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={benefitsInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                >
-                  <Enhanced3DCard>
-                    <div className="p-8 text-center h-full">
-                      <div className={`w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-white/10 to-white/5 rounded-xl flex items-center justify-center ${benefit.color}`}>
-                        <Icon className="w-8 h-8" />
+              {/* Social Links */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={heroInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="mb-4"
+              >
+                <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">Follow Us</h3>
+                <div className="flex flex-wrap gap-4 sm:gap-6">
+                  {socialLinks.map((social, index) => {
+                    const Icon = social.icon;
+                    return (
+                      <motion.a
+                        key={index}
+                        href={social.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1, y: -2 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`w-12 h-12 sm:w-16 sm:h-16 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg flex items-center justify-center text-gray-400 transition-colors ${social.color}`}
+                      >
+                        <Icon className="w-7 h-7 sm:w-8 sm:h-8" />
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* Send Message Form */}
+            <motion.div
+              ref={formRef}
+              initial={{ opacity: 0, x: 50 }}
+              animate={formInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <Enhanced3DCard>
+                <div className="p-4 sm:p-8">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">Send Message</h2>
+                  <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
+                        <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required
+                          className="w-full px-4 py-3 bg-white/5 border border-white rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-colors"
+                          placeholder="Your name"
+                        />
                       </div>
-                      <h3 className="text-xl font-semibold text-white mb-4">{benefit.title}</h3>
-                      <p className="text-gray-400 leading-relaxed">{benefit.description}</p>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                        <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required
+                          className="w-full px-4 py-3 bg-white/5 border border-white rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-colors"
+                          placeholder="your.email@example.com"
+                        />
+                      </div>
                     </div>
-                  </Enhanced3DCard>
-                </motion.div>
-              );
-            })}
+
+                    <div>
+                      <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                      <input type="text" id="subject" name="subject" value={formData.subject} onChange={handleInputChange} required
+                        className="w-full px-4 py-3 bg-white/5 border border-white rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-colors"
+                        placeholder="What's this about?"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                      <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required rows={6}
+                        className="w-full px-4 py-3 bg-white/5 border border-white rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-colors resize-none"
+                        placeholder="Tell us more about your inquiry..."
+                      />
+                    </div>
+
+                    <motion.button type="submit" whileHover={{ scale: 1.02, y: -2 }} whileTap={{ scale: 0.98 }}
+                      className="w-full py-4 bg-gradient-to-r from-[#2580E4] to-[#1B6DC1] text-white font-semibold rounded-lg shadow-lg hover:shadow-[0_4px_8px_0_#2580E433,0_5px_12px_0_#36B7B766] transition-all duration-300 flex items-center justify-center space-x-2"
+                    >
+                      <IconSend className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </motion.button>
+                  </form>
+                </div>
+              </Enhanced3DCard>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Membership Form */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Location Section */}
+      <section className="pt-10 pb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            ref={formRef}
             initial={{ opacity: 0, y: 50 }}
             animate={formInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Enhanced3DCard>
-              <div className="p-8">
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-white mb-4">
-                    Start Your Journey
-                  </h2>
-                  <p className="text-gray-400">
-                    Fill out the form below to become a member of CSI SFIT
-                  </p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Basic Information */}
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-colors"
-                        placeholder="Your full name"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-colors"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 transition-colors"
-                        placeholder="+91 98765 43210"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="year" className="block text-sm font-medium text-gray-300 mb-2">
-                        Academic Year *
-                      </label>
-                      <select
-                        id="year"
-                        name="year"
-                        value={formData.year}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50"
-                      >
-                        <option value="" className="bg-dark-800">Select Year</option>
-                        <option value="first" className="bg-dark-800">First Year</option>
-                        <option value="second" className="bg-dark-800">Second Year</option>
-                        <option value="third" className="bg-dark-800">Third Year</option>
-                        <option value="final" className="bg-dark-800">Final Year</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="department" className="block text-sm font-medium text-gray-300 mb-2">
-                      Department *
-                    </label>
-                    <select
-                      id="department"
-                      name="department"
-                      value={formData.department}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50"
-                    >
-                      <option value="" className="bg-dark-800">Select Department</option>
-                      <option value="computer" className="bg-dark-800">Computer Engineering</option>
-                      <option value="it" className="bg-dark-800">Information Technology</option>
-                      <option value="electronics" className="bg-dark-800">Electronics Engineering</option>
-                      <option value="extc" className="bg-dark-800">Electronics & Telecommunication</option>
-                      <option value="mechanical" className="bg-dark-800">Mechanical Engineering</option>
-                      <option value="other" className="bg-dark-800">Other</option>
-                    </select>
-                  </div>
-
-                  {/* Interests */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-300 mb-4">
-                      Areas of Interest (Select all that apply)
-                    </label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {interestOptions.map((interest) => (
-                        <motion.button
-                          key={interest}
-                          type="button"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          onClick={() => handleInterestToggle(interest)}
-                          className={`p-3 rounded-lg text-sm font-medium transition-all duration-300 ${
-                            formData.interests.includes(interest)
-                              ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white'
-                              : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'
-                          }`}
-                        >
-                          {interest}
-                        </motion.button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Terms */}
-                  <div className="flex items-center space-x-3">
-                    <input
-                      type="checkbox"
-                      id="terms"
-                      required
-                      className="w-4 h-4 rounded border-white/20 bg-white/5 text-primary-500 focus:ring-primary-500/50"
-                    />
-                    <label htmlFor="terms" className="text-sm text-gray-300">
-                      I agree to the terms and conditions and privacy policy
-                    </label>
-                  </div>
-
-                  {/* Submit Button */}
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-primary-500/25 transition-all duration-300 flex items-center justify-center space-x-2"
-                  >
-                    <span>Join CSI SFIT</span>
-                    <ArrowRight className="w-5 h-5" />
-                  </motion.button>
-                </form>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 sm:mb-6">Location</h2>
+            <GlassCard className="overflow-hidden">
+              <div className="h-64 sm:h-96 w-full">
+                <iframe
+                  title="CSI SFIT Location"
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3766.8900917764836!2d72.853269!3d19.2436212!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b13affffffff%3A0xfd071f1d3a7844ef!2sSt.%20Francis%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1751699365795!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, filter: 'invert(90%)' }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
-            </Enhanced3DCard>
+            </GlassCard>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Why Join */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GlassCard className="p-8">
-            <div className="text-center mb-8">
-              <Star className="w-16 h-16 text-primary-500 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Why Join CSI SFIT?</h3>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-6 text-gray-300">
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Access to industry experts and mentors</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Hands-on project experience</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Career guidance and placement support</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Scholarship and internship opportunities</span>
-                </div>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Build your professional network</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Leadership and organizational skills</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Recognition and awards</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  <span>Lifetime alumni network access</span>
-                </div>
-              </div>
-            </div>
-          </GlassCard>
         </div>
       </section>
     </div>
