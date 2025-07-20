@@ -98,6 +98,19 @@ export const Membership: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Membership form submitted:', formData);
+
+        /// Sending data to Google Apps Script
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzCeLaKqxz3ZX8H3EM5_PD340vAHh0ywfMvXTMR-mIeJ397hiTkCJ_lc2gGSNhATmW6/exec'; 
+
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
